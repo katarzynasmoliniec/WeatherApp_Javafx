@@ -27,6 +27,7 @@ public class ViewFactory {
         Scene scene = new Scene(parent);
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.setTitle("Zobacz pogodę dla miejsc z Twojej podróży!");
         stage.show();
     }
 }
