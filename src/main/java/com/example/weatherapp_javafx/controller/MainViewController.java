@@ -1,6 +1,6 @@
 package com.example.weatherapp_javafx.controller;
 
-import com.example.weatherapp_javafx.model.Weather;
+import com.example.weatherapp_javafx.model.SingleDayWeather;
 import com.example.weatherapp_javafx.model.WeatherService;
 import com.example.weatherapp_javafx.model.WeatherServiceFactory;
 import com.example.weatherapp_javafx.views.ViewFactory;
@@ -10,17 +10,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
     @FXML
     private TextField currentCityField;
     @FXML
-    private TextField currentCountryField;
-    @FXML
     private TextField searchCityField;
-    @FXML
-    private TextField searchCountryField;
     @FXML
     private Label currenrTemparatureLabel;
     @FXML
@@ -28,37 +25,35 @@ public class MainViewController implements Initializable {
 
     private WeatherService weatherService;
 
-   // protected ViewFactory viewFactory;
+    protected ViewFactory viewFactory;
     private final String fxmlName;
 
     public MainViewController(ViewFactory viewFactory, String fmlName) {
-       // this.viewFactory = viewFactory;
+        this.viewFactory = viewFactory;
         this.fxmlName = fmlName;
     }
 
     @FXML
     void currentLocationBtn() {
         System.out.println("Current button");
-        Weather weather = weatherService.getWeather(currentCountryField.getText(), currentCityField.getText());
-        displayWeather(weather);
-        
-//        Weather weather = new Weather(currentCityField.getText(), searchCityField.getText(),
-//                currentCountryField.getText(), searchCountryField.getText());
-    }
-
-    private void displayWeather(Weather weather) {
-        currenrTemparatureLabel.setVisible(true);
-        searchTemparatureLabel.setVisible(true);
-       // currenrTemparatureLabel.setText(weather.getTempInCelsius());
+        Collection <SingleDayWeather> singleDayWeather = weatherService.getWeather(currentCityField.getText());
+        displayWeatherCurrent(singleDayWeather);
     }
 
     @FXML
     void searchLocationBtn() {
         System.out.println("Search button");
-        Weather weather = weatherService.getWeather(searchCountryField.getText(), searchCityField.getText());
+        Collection <SingleDayWeather> searchWeather = weatherService.getWeather(searchCityField.getText());
+        displayWeatherSearch(searchWeather);
 
-//        Weather weather = new Weather(currentCityField.getText(), searchCityField.getText(),
-//                currentCountryField.getText(), searchCountryField.getText());
+    }
+    private void displayWeatherCurrent(Collection<SingleDayWeather> singleDayWeather) {
+        currenrTemparatureLabel.setVisible(true);
+        currenrTemparatureLabel.setText(singleDayWeather.toString());
+    }
+    private void displayWeatherSearch(Collection <SingleDayWeather> searchWeather) {
+        searchTemparatureLabel.setVisible(true);
+        searchTemparatureLabel.setText(searchWeather.toString());
     }
     public String getFxmlName() { return fxmlName;}
 
