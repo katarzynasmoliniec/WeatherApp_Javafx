@@ -1,8 +1,5 @@
 package com.example.weatherapp_javafx.model.client.dto;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 public class OpenWeatherListDto {
 
     private OpenWeatherMain main;

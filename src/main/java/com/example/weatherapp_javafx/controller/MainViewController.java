@@ -1,66 +1,103 @@
 package com.example.weatherapp_javafx.controller;
 
-import com.example.weatherapp_javafx.model.SingleDayWeather;
+import com.example.weatherapp_javafx.model.WeatherForecast;
 import com.example.weatherapp_javafx.model.WeatherService;
 import com.example.weatherapp_javafx.model.WeatherServiceFactory;
 import com.example.weatherapp_javafx.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-
+import javafx.scene.control.*;
 import java.net.URL;
-import java.util.Collection;
 import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
     @FXML
+    private Label weatherLabel;
+    @FXML
     private TextField currentCityField;
+    @FXML
+    private Label errorCurrentLabel;
+    @FXML
+    private Label currentCityName;
+    @FXML
+    private TextArea currentTexArea;
     @FXML
     private TextField searchCityField;
     @FXML
-    private Label currenrTemparatureLabel;
+    private Label errorSearchLabel;
     @FXML
-    private Label searchTemparatureLabel;
+    private Label searchCityName;
+    @FXML
+    private TextArea searchTextArea;
 
-    private WeatherService weatherService;
-
+    protected WeatherService weatherService;
     protected ViewFactory viewFactory;
-    private final String fxmlName;
+    private String fxmlName;
 
-    public MainViewController(ViewFactory viewFactory, String fmlName) {
+    public MainViewController(ViewFactory viewFactory, String fxmlName) {
         this.viewFactory = viewFactory;
-        this.fxmlName = fmlName;
+        this.fxmlName = fxmlName;
     }
 
     @FXML
     void currentLocationBtn() {
         System.out.println("Current button");
-        Collection <SingleDayWeather> singleDayWeather = weatherService.getWeather(currentCityField.getText());
-        displayWeatherCurrent(singleDayWeather);
+        if (currentFieldAreValid()) {
+            WeatherForecast currentWeather = weatherService.getWeather(currentCityField.getText());
+            displayWeatherCurrent(currentWeather);
+        }
+    }
+    private void displayWeatherCurrent(WeatherForecast currentWeather) {
+        currentCityName.setVisible(true);
+        currentCityName.setText(currentWeather.getCityName().toUpperCase());
+        currentTexArea.setVisible(true);
+        currentTexArea.setText(currentWeather.toString());
     }
 
     @FXML
     void searchLocationBtn() {
         System.out.println("Search button");
-        Collection <SingleDayWeather> searchWeather = weatherService.getWeather(searchCityField.getText());
-        displayWeatherSearch(searchWeather);
+        if (searchFieldAreValid()) {
+            WeatherForecast searchWeather = weatherService.getWeather(searchCityField.getText());
+            displayWeatherSearch(searchWeather);
+        }
+    }
 
+    private void displayWeatherSearch(WeatherForecast searchWeather) {
+        searchCityName.setVisible(true);
+        searchCityName.setText(searchWeather.getCityName().toUpperCase());
+        searchTextArea.setVisible(true);
+        searchTextArea.setText(searchWeather.toString());
     }
-    private void displayWeatherCurrent(Collection<SingleDayWeather> singleDayWeather) {
-        currenrTemparatureLabel.setVisible(true);
-        currenrTemparatureLabel.setText(singleDayWeather.toString());
-    }
-    private void displayWeatherSearch(Collection <SingleDayWeather> searchWeather) {
-        searchTemparatureLabel.setVisible(true);
-        searchTemparatureLabel.setText(searchWeather.toString());
-    }
-    public String getFxmlName() { return fxmlName;}
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         weatherService = WeatherServiceFactory.createWeatherService();
-        currenrTemparatureLabel.setVisible(false);
-        searchTemparatureLabel.setVisible(false);
+        currentCityName.setVisible(false);
+        currentTexArea.setVisible(false);
+        searchCityName.setVisible(false);
+        searchTextArea.setVisible(false);
+    }
+    private boolean currentFieldAreValid() {
+        if (currentCityField.getText().isEmpty()) {
+            errorCurrentLabel.setText("Proszę wpisać miasto");
+            return false;
+        } else {
+            errorCurrentLabel.setText("");
+            return true;
+        }
+    }
+
+    private boolean searchFieldAreValid() {
+        if (searchCityField.getText().isEmpty()) {
+            errorSearchLabel.setText("Proszę wpisać miasto podróży");
+            return false;
+        } else {
+            errorSearchLabel.setText("");
+            return true;
+        }
+    }
+
+    public String getFxmlName() {
+        return fxmlName;
     }
 }

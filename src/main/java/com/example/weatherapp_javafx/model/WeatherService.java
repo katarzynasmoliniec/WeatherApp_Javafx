@@ -1,7 +1,9 @@
 package com.example.weatherapp_javafx.model;
 
 import com.example.weatherapp_javafx.model.client.WeatherClient;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class WeatherService {
 
@@ -11,9 +13,9 @@ public class WeatherService {
         this.weatherClient = weatherClient;
     }
 
-    public Collection <SingleDayWeather> getWeather(String cityName) {
+    public WeatherForecast getWeather(String cityName) {
         Collection<SingleDayWeather> currentWeather = weatherClient.currentWeather(cityName);
-        System.out.println(currentWeather);
-        return currentWeather;
+        List<SingleDayWeather> result = new ArrayList<>(currentWeather);
+        return new WeatherForecast(cityName, result);
     }
 }

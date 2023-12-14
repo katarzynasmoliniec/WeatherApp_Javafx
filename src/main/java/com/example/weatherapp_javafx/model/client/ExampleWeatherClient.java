@@ -3,7 +3,6 @@ package com.example.weatherapp_javafx.model.client;
 import com.example.weatherapp_javafx.model.SingleDayWeather;
 import com.example.weatherapp_javafx.model.client.dto.OpenWeatherDto;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -24,9 +23,8 @@ public class ExampleWeatherClient implements WeatherClient {
         int cnt = openWeatherDto.getCnt();
         List<SingleDayWeather> result = new ArrayList<>();
 
-        for (int i = 0; i < cnt; i++) {
+        for (int i = 0; i < cnt; i = i + 8) {
             result.add(new SingleDayWeather(
-                    openWeatherDto.getCity().getName(),
                     openWeatherDto.getList().get(i).getMain().getTemp(),
                     openWeatherDto.getList().get(i).getDt_txt())
             );
