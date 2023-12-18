@@ -20,6 +20,8 @@ public class MainViewController implements Initializable {
     @FXML
     private Label currentCityName;
     @FXML
+    private Label currentTextLabel;
+    @FXML
     private TextArea currentTexArea;
     @FXML
     private TextField searchCityField;
@@ -27,6 +29,8 @@ public class MainViewController implements Initializable {
     private Label errorSearchLabel;
     @FXML
     private Label searchCityName;
+    @FXML
+    private Label searchTextLabel;
     @FXML
     private TextArea searchTextArea;
 
@@ -41,7 +45,6 @@ public class MainViewController implements Initializable {
 
     @FXML
     void currentLocationBtn() {
-        System.out.println("Current button");
         if (currentFieldAreValid()) {
             WeatherForecast currentWeather = weatherService.getWeather(currentCityField.getText());
             displayWeatherCurrent(currentWeather);
@@ -50,13 +53,12 @@ public class MainViewController implements Initializable {
     private void displayWeatherCurrent(WeatherForecast currentWeather) {
         currentCityName.setVisible(true);
         currentCityName.setText(currentWeather.getCityName().toUpperCase());
-        currentTexArea.setVisible(true);
-        currentTexArea.setText(currentWeather.toString());
+        currentTextLabel.setVisible(true);
+        currentTextLabel.setText(currentWeather.toString());
     }
 
     @FXML
     void searchLocationBtn() {
-        System.out.println("Search button");
         if (searchFieldAreValid()) {
             WeatherForecast searchWeather = weatherService.getWeather(searchCityField.getText());
             displayWeatherSearch(searchWeather);
@@ -66,16 +68,16 @@ public class MainViewController implements Initializable {
     private void displayWeatherSearch(WeatherForecast searchWeather) {
         searchCityName.setVisible(true);
         searchCityName.setText(searchWeather.getCityName().toUpperCase());
-        searchTextArea.setVisible(true);
-        searchTextArea.setText(searchWeather.toString());
+        searchTextLabel.setVisible(true);
+        searchTextLabel.setText(searchWeather.toString());
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         weatherService = WeatherServiceFactory.createWeatherService();
         currentCityName.setVisible(false);
-        currentTexArea.setVisible(false);
+        currentTextLabel.setVisible(false);
         searchCityName.setVisible(false);
-        searchTextArea.setVisible(false);
+        searchTextLabel.setVisible(false);
     }
     private boolean currentFieldAreValid() {
         if (currentCityField.getText().isEmpty()) {
@@ -96,7 +98,6 @@ public class MainViewController implements Initializable {
             return true;
         }
     }
-
     public String getFxmlName() {
         return fxmlName;
     }

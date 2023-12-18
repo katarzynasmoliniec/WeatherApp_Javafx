@@ -37,8 +37,8 @@ public class SingleDayWeather {
     @Override
     public String toString() {
         return new StringJoiner(" ", "", "")
-                .add("Temperatura: " + temperature + " °C")
-                .add("Data: " + date)
+                .add(DayOfWeekName.valueOf(date.getDayOfWeek().toString()) + "")
+                .add(temperature + " °C")
                 .add("\n")
                 .toString();
     }

@@ -18,7 +18,6 @@ public class WeatherForecast {
     @Override
     public String toString() {
         return new StringJoiner(" ", "", "")
-                .add("Twoja pogoda \n")
                 .add( weathers.toString().replace("[", "").replace("]", "").replace(",", ""))
                 .toString();
     }
