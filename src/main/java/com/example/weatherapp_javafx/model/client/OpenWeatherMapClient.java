@@ -8,11 +8,13 @@ import java.util.Collection;
 import java.util.List;
 
 
-public class ExampleWeatherClient implements WeatherClient {
+public class OpenWeatherMapClient implements WeatherClient {
 
-    private RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
     private static final String WEATHER_URL = "http://api.openweathermap.org/data/2.5/";
     private static final String API_KEY = "5f46e9291e83dbac9d73644d47b1c20a";
+
+    public OpenWeatherMapClient(RestTemplate restTemplate) { this.restTemplate = restTemplate; }
 
     @Override
     public Collection<SingleDayWeather> currentWeather(String cityName) {

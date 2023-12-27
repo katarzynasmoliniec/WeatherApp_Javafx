@@ -13,7 +13,7 @@ public class WeatherForecast {
     }
     public String getCityName() { return cityName; }
 
-    public Collection<SingleDayWeather> getWeathers() { return weathers; }
+    //public Collection<SingleDayWeather> getWeathers() { return weathers; }
 
     @Override
     public String toString() {

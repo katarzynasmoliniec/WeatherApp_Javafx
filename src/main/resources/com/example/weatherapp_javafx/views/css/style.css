@@ -1,0 +1,15 @@
+.container {
+    -fx-background-image: url('./img/sky1.jpg');
+}
+.errorText {
+    -fx-text-fill : #690f0f;
+    -fx-font-weight: bold;
+    -fx-font-size: 13pt;
+}
+Button {
+    -fx-background-color : #353b4a;
+    -fx-text-fill: white;
+}
+Button:hover {
+    -fx-background-color : #616c87;
+}
