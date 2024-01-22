@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="585.0" prefWidth="721.0" styleClass="container" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
@@ -51,22 +53,160 @@
          </font></Label>
       <Label fx:id="currentCityName" alignment="CENTER" layoutX="31.0" layoutY="247.0" lineSpacing="2.0" prefHeight="53.0" prefWidth="287.0" textAlignment="CENTER" textFill="#1f6b94">
          <font>
-            <Font name="System Bold Italic" size="36.0" />
+            <Font name="System Bold Italic" size="33.0" />
          </font>
       </Label>
       <Label fx:id="searchCityName" alignment="CENTER" layoutX="380.0" layoutY="247.0" lineSpacing="2.0" prefHeight="53.0" prefWidth="272.0" textAlignment="CENTER" textFill="#1f6b94">
          <font>
             <Font name="System Bold Italic" size="36.0" />
          </font></Label>
-      <Label fx:id="currentTextLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="300.0" prefHeight="235.0" prefWidth="272.0" textAlignment="CENTER" textFill="#76b7da">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label fx:id="searchTextLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="380.0" layoutY="300.0" prefHeight="235.0" prefWidth="272.0" textAlignment="CENTER" textFill="#76b7da">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
+      <VBox alignment="CENTER" layoutX="45.0" layoutY="300.0" prefHeight="235.0" prefWidth="272.0">
+         <children>
+            <HBox alignment="CENTER" prefWidth="272.0">
+               <children>
+                  <Label fx:id="currentTextLabel1" alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="158.0" textAlignment="RIGHT" textFill="#f7f8f8">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="currentTextLabel11" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="77.0" textFill="#76b7da">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label fx:id="currentTextLabel2" alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="158.0" textAlignment="RIGHT" textFill="#76b7da">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="currentTextLabel21" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="77.0" textFill="#76b7da">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label fx:id="currentTextLabel3" alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="158.0" textAlignment="RIGHT" textFill="#f8f8f8">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="currentTextLabel31" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="77.0" textFill="#76b7da">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label fx:id="currentTextLabel4" alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="158.0" textAlignment="RIGHT" textFill="#76b7da">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="currentTextLabel41" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="77.0" textFill="#76b7da">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label fx:id="currentTextLabel5" alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="158.0" textAlignment="RIGHT" textFill="#fdfeff">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="currentTextLabel51" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="77.0" textFill="#76b7da">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="370.0" layoutY="300.0" prefHeight="235.0" prefWidth="272.0">
+         <children>
+            <HBox alignment="CENTER" prefWidth="272.0">
+               <children>
+                  <Label fx:id="searchTextLabel1" alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="158.0" textAlignment="RIGHT" textFill="#f7f8f8">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="searchTextLabel11" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="77.0" textFill="#76b7da">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label fx:id="searchTextLabel2" alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="158.0" textAlignment="RIGHT" textFill="#76b7da">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="searchTextLabel21" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="77.0" textFill="#76b7da">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label fx:id="searchTextLabel3" alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="158.0" textAlignment="RIGHT" textFill="#f8f8f8">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="searchTextLabel31" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="77.0" textFill="#76b7da">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label fx:id="searchTextLabel4" alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="158.0" textAlignment="RIGHT" textFill="#76b7da">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="searchTextLabel41" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="77.0" textFill="#76b7da">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label fx:id="searchTextLabel5" alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="158.0" textAlignment="RIGHT" textFill="#fdfeff">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="searchTextLabel51" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="77.0" textFill="#76b7da">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

@@ -1,19 +1,22 @@
 package com.example.weatherapp_javafx.model;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.StringJoiner;
 
 public class WeatherForecast {
     private final String cityName;
-    private final Collection<SingleDayWeather> weathers;
+    private final List<SingleDayWeather> weathers;
 
-    public WeatherForecast(String cityName, Collection<SingleDayWeather> weathers) {
+    public WeatherForecast(String cityName, List<SingleDayWeather> weathers) {
         this.cityName = cityName;
         this.weathers = weathers;
     }
     public String getCityName() { return cityName; }
 
-    //public Collection<SingleDayWeather> getWeathers() { return weathers; }
+    public List<SingleDayWeather> getWeathers() {
+        return weathers;
+    }
+
 
     @Override
     public String toString() {

@@ -1,8 +1,11 @@
 package com.example.weatherapp_javafx.model.client;
 
 import com.example.weatherapp_javafx.model.SingleDayWeather;
-import java.util.Collection;
+import com.example.weatherapp_javafx.model.StatusCode;
+
+import java.util.List;
 
 public interface WeatherClient {
-    Collection<SingleDayWeather> currentWeather(String cityName);
+    List<SingleDayWeather> currentWeather(String cityName);
+    StatusCode getCode(String cityName);
 }

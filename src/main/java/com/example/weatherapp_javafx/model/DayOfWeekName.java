@@ -1,13 +1,13 @@
 package com.example.weatherapp_javafx.model;
 
 public enum DayOfWeekName {
-    MONDAY ("Poniedziałek"),
-    TUESDAY ("Wtorek"),
-    WEDNESDAY ("Środa"),
-    THURSDAY ("Czwartek"),
-    FRIDAY ("Piątek"),
-    SATURDAY ("Sobota"),
-    SUNDAY ("Niedziela");
+    MONDAY ("Pon"),
+    TUESDAY ("Wt"),
+    WEDNESDAY ("Śr"),
+    THURSDAY ("Czw"),
+    FRIDAY ("Pią"),
+    SATURDAY ("Sob"),
+    SUNDAY ("Niedz");
 
     private String dayName;
     DayOfWeekName(String dayName) {
