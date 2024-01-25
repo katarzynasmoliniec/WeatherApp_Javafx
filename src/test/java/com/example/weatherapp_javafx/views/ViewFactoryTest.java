@@ -1,16 +1,21 @@
 package com.example.weatherapp_javafx.views;
 
-import org.junit.jupiter.api.Test;
+import com.example.weatherapp_javafx.controller.MainViewController;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 class ViewFactoryTest {
-    @Test
-    void initializeStage () {
-        //given
-        //when
-        //then
 
-    }
+//    @Test
+//    void showMainWindow() {
+//        //given
+//        var resultViewFactory = new ViewFactory();
+//        var controller = mock(MainViewController.class);
+//        given(controller.getFxmlName()).willReturn("MainView.fxml");
+//
+//        resultViewFactory.showMainWindow();
+//    }
 
 }

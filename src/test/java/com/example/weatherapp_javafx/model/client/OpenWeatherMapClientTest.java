@@ -7,11 +7,10 @@ import com.example.weatherapp_javafx.model.client.dto.OpenWeatherDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -23,15 +22,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.when;
 import static org.springframework.util.Assert.*;
 
 @ExtendWith(MockitoExtension.class)
 class OpenWeatherMapClientTest {
     @InjectMocks
     private WeatherService weatherService;
-    @Mock
-    private OpenWeatherMapClient openWeatherMapClient;
+    @Spy
+    private OpenWeatherMapClient spyMapClient = new OpenWeatherMapClient(new RestTemplate());
 
     private final String baseUrl = "http://api.openweathermap.org/data/2.5/forecast?q=kraków&appid=5f46e9291e83dbac9d73644d47b1c20a&lang=pl&units=metric";
 
@@ -71,18 +69,7 @@ class OpenWeatherMapClientTest {
     void shouldReturnStatusCodeSuccess() {
         //given
         StatusCode status = StatusCode.SUCCESS;
-        given(openWeatherMapClient.getCode("Kraków")).willReturn(StatusCode.SUCCESS);
-        //when
-        StatusCode result = weatherService.getStatusConnect("Kraków");
-        //then
-        assertThat(result, is(status));
-    }
-
-    @Test
-    void shouldReturnStatusCodeFailedUnexpectedError() {
-        //given
-        StatusCode status = StatusCode.FAILED_UNEXPECTED_ERROR;
-        given(openWeatherMapClient.getCode("Kraków")).willReturn(StatusCode.FAILED_UNEXPECTED_ERROR);
+        given(spyMapClient.getCode("Kraków")).willReturn(StatusCode.SUCCESS);
         //when
         StatusCode result = weatherService.getStatusConnect("Kraków");
         //then
@@ -93,18 +80,7 @@ class OpenWeatherMapClientTest {
     void shouldReturnStatusCodeFailed_4() {
         //given
         StatusCode status = StatusCode.FAILED_4;
-        given(openWeatherMapClient.getCode("Kraków")).willReturn(StatusCode.FAILED_4);
-        //when
-        StatusCode result = weatherService.getStatusConnect("Kraków");
-        //then
-        assertThat(result, is(status));
-    }
-
-    @Test
-    void shouldReturnStatusCodeFailed_5() {
-        //given
-        StatusCode status = StatusCode.FAILED_5;
-        given(openWeatherMapClient.getCode("Kraków")).willReturn(StatusCode.FAILED_5);
+        given(spyMapClient.getCode("Kraków")).willReturn(StatusCode.FAILED_4);
         //when
         StatusCode result = weatherService.getStatusConnect("Kraków");
         //then
@@ -113,34 +89,16 @@ class OpenWeatherMapClientTest {
     @Test
     void shouldThrowFailedToGetCodeWhenCodeNotFound() {
         //given
-        when(openWeatherMapClient.getCode("Krak")).thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
+        given(spyMapClient.getCode("Krak")).willThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
         //when
         //then
-        assertThrows(HttpClientErrorException.class, () -> openWeatherMapClient.getCode("Krak"));
-    }
-
-    @Test
-    void shouldThrowFailedToGetCodeWhenServerIsFailed() {
-        //given
-        when(openWeatherMapClient.getCode("Krak")).thenThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR));
-        //when
-        //then
-        assertThrows(HttpServerErrorException.class, () -> openWeatherMapClient.getCode("Krak"));
-    }
-
-    @Test
-    void shouldThrowFailedToGetCodeException() {
-        //given
-        given(openWeatherMapClient.getCode("Kraków")).willThrow(new RuntimeException());
-        //when
-        //then
-        assertThrows(RuntimeException.class, () -> openWeatherMapClient.getCode("Kraków"));
+        assertThrows(HttpClientErrorException.class, () -> spyMapClient.getCode("Krak"));
     }
 
     @Test
     void currentWeatherShouldBeReturnList() {
         List<SingleDayWeather> list = prepareWeatherForecastData();
-        given(openWeatherMapClient.currentWeather("Kraków")).willReturn(list);
+        given(spyMapClient.currentWeather("Kraków")).willReturn(list);
         //when
         List<SingleDayWeather> resul = weatherService.getWeather("Kraków");
         //then

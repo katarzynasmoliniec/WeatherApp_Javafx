@@ -3,11 +3,10 @@ package com.example.weatherapp_javafx.model.client;
 import com.example.weatherapp_javafx.model.SingleDayWeather;
 import com.example.weatherapp_javafx.model.StatusCode;
 import com.example.weatherapp_javafx.model.client.dto.OpenWeatherDto;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,31 +16,24 @@ public class OpenWeatherMapClient implements WeatherClient {
     private final RestTemplate restTemplate;
     private static final String WEATHER_URL = "http://api.openweathermap.org/data/2.5/";
     private static final String API_KEY = "5f46e9291e83dbac9d73644d47b1c20a";
+
     public OpenWeatherMapClient(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
-
     @Override
     public StatusCode getCode(String cityName) {
         try {
-            ResponseEntity<OpenWeatherDto> response = callGetMethod("forecast?q={cityName}&appid={API_KEY}&lang=pl&units=metric",
+            callGetMethod("forecast?q={cityName}&appid={API_KEY}&lang=pl&units=metric",
                     OpenWeatherDto.class,
                     cityName,
                     API_KEY);
-            if (HttpStatus.OK == response.getStatusCode()) {
-                return StatusCode.SUCCESS;
-            } else {
-                return StatusCode.FAILED_UNEXPECTED_ERROR;
-            }
+            return StatusCode.SUCCESS;
         } catch (HttpClientErrorException e) {
             e.printStackTrace();
             return StatusCode.FAILED_4;
-        } catch (HttpServerErrorException e) {
-            return StatusCode.FAILED_5;
-        } catch (Exception e) {
-            return StatusCode.FAILED_UNEXPECTED_ERROR;
         }
     }
+
     @Override
     public List<SingleDayWeather> currentWeather(String cityName) {
         ResponseEntity<OpenWeatherDto> openWeatherDto = callGetMethod("forecast?q={cityName}&appid={API_KEY}&lang=pl&units=metric",

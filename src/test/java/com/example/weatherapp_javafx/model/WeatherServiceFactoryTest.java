@@ -12,9 +12,8 @@ import org.mockito.quality.Strictness;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
+@ExtendWith(MockitoExtension.class)
 class WeatherServiceFactoryTest {
-
-    @ExtendWith(MockitoExtension.class)
     @MockitoSettings(strictness = Strictness.LENIENT)
     @Test
     void weatherClientShouldBeNotNull() {
@@ -24,31 +23,16 @@ class WeatherServiceFactoryTest {
                     .when(WeatherServiceFactory::createWeatherService)
                     .thenReturn(expectedExpression);
             assertEquals(expectedExpression, WeatherServiceFactory.createWeatherService());
-
-            var expectedWeatherClient = new WeatherService(mock(WeatherClient.class));
-            mockedStatic
-                    .when(WeatherServiceFactory::createWeatherService)
-                    .thenReturn(expectedWeatherClient);
-            assertEquals(expectedWeatherClient, WeatherServiceFactory.createWeatherService());
         }
     }
-
-    @ExtendWith(MockitoExtension.class)
-    @MockitoSettings(strictness = Strictness.LENIENT)
     @Test
     void weatherClientShouldBeOpenWeatherMapClient() {
         try (var mockedStatic = Mockito.mockStatic(WeatherServiceFactory.class)) {
-            var expectedExpression = new WeatherService(mock(OpenWeatherMapClient.class));
+            var expectedExpression = mock(OpenWeatherMapClient.class);
             mockedStatic
-                    .when(WeatherServiceFactory::createWeatherService)
+                    .when(WeatherServiceFactory::createWeatherClient)
                     .thenReturn(expectedExpression);
-            assertEquals(expectedExpression, WeatherServiceFactory.createWeatherService());
-
-            var expectedWeatherClient = new WeatherService(mock(OpenWeatherMapClient.class));
-            mockedStatic
-                    .when(WeatherServiceFactory::createWeatherService)
-                    .thenReturn(expectedWeatherClient);
-            assertEquals(expectedWeatherClient, WeatherServiceFactory.createWeatherService());
+            assertEquals(expectedExpression, WeatherServiceFactory.createWeatherClient());
         }
     }
 

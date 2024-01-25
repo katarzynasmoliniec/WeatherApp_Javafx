@@ -6,6 +6,6 @@ import org.springframework.web.client.RestTemplate;
 
 public class WeatherServiceFactory {
     public static WeatherService createWeatherService() { return new WeatherService(createWeatherClient()); }
-    private static WeatherClient createWeatherClient() { return new OpenWeatherMapClient(new RestTemplate());
+    protected static WeatherClient createWeatherClient() { return new OpenWeatherMapClient(new RestTemplate());
     }
 }
