@@ -3,6 +3,7 @@ package com.example.weatherapp_javafx.model.client;
 import com.example.weatherapp_javafx.model.SingleDayWeather;
 import com.example.weatherapp_javafx.model.StatusCode;
 import com.example.weatherapp_javafx.model.client.dto.OpenWeatherDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
@@ -27,8 +28,11 @@ public class OpenWeatherMapClient implements WeatherClient {
                     OpenWeatherDto.class,
                     cityName,
                     API_KEY);
-
-            return StatusCode.SUCCESS;
+            if (HttpStatus.OK == response.getStatusCode()) {
+                return StatusCode.SUCCESS;
+            } else {
+                return StatusCode.FAILED_UNEXPECTED_ERROR;
+            }
         } catch (HttpClientErrorException e) {
             e.printStackTrace();
             return StatusCode.FAILED_4;

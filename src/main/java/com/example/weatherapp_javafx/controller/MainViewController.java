@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
@@ -20,12 +21,10 @@ public class MainViewController implements Initializable {
     private Label errorCurrentLabel;
     @FXML
     private Label currentCityName;
-
     @FXML
     private Label currentTextLabel1;
     @FXML
     private Label currentTextLabel11;
-
     @FXML
     private Label currentTextLabel2;
 
@@ -49,8 +48,6 @@ public class MainViewController implements Initializable {
 
     @FXML
     private Label currentTextLabel51;
-
-
     @FXML
     private TextField searchCityField;
     @FXML
@@ -89,7 +86,7 @@ public class MainViewController implements Initializable {
 
     protected WeatherService weatherService;
     protected ViewFactory viewFactory;
-    private String fxmlName;
+    private final String fxmlName;
 
     public MainViewController(ViewFactory viewFactory, String fxmlName) {
         this.viewFactory = viewFactory;
@@ -103,11 +100,11 @@ public class MainViewController implements Initializable {
             StatusCode statusCode = weatherService.getStatusConnect(currentCityField.getText());
 
             switch (statusCode) {
-                case SUCCESS:
-                    WeatherForecast currentWeather = weatherService.getWeather(currentCityField.getText());
+                case SUCCESS -> {
+                    List<SingleDayWeather> currentWeather = weatherService.getWeather(currentCityField.getText());
                     displayWeatherCurrent(currentWeather);
-                    break;
-                case FAILED_4:
+                }
+                case FAILED_4 -> {
                     errorCurrentLabel.setText("Proszę podać poprawne miasto");
                     currentCityName.setVisible(false);
                     currentTextLabel1.setVisible(false);
@@ -120,8 +117,8 @@ public class MainViewController implements Initializable {
                     currentTextLabel41.setVisible(false);
                     currentTextLabel5.setVisible(false);
                     currentTextLabel51.setVisible(false);
-                    break;
-                case FAILED_5:
+                }
+                case FAILED_5 -> {
                     errorCurrentLabel.setText("Niestety serwer jest teraz niedostępny");
                     currentCityName.setVisible(false);
                     currentTextLabel1.setVisible(false);
@@ -134,8 +131,8 @@ public class MainViewController implements Initializable {
                     currentTextLabel41.setVisible(false);
                     currentTextLabel5.setVisible(false);
                     currentTextLabel51.setVisible(false);
-                    break;
-                case FAILED_UNEXPECTED_ERROR:
+                }
+                case FAILED_UNEXPECTED_ERROR -> {
                     errorCurrentLabel.setText("Nieoczekiwany błąd");
                     currentCityName.setVisible(false);
                     currentTextLabel1.setVisible(false);
@@ -148,19 +145,20 @@ public class MainViewController implements Initializable {
                     currentTextLabel41.setVisible(false);
                     currentTextLabel5.setVisible(false);
                     currentTextLabel51.setVisible(false);
-                    break;
+                }
             }
         }
     }
 
-    private void displayWeatherCurrent(WeatherForecast currentWeather) {
+    private void displayWeatherCurrent(List<SingleDayWeather> currentWeather) {
         currentCityName.setVisible(true);
-        currentCityName.setText(currentWeather.getWeathers().get(0).getCityName().toUpperCase()+ ", " + currentWeather.getWeathers().get(0).getCountry().toUpperCase());
+        currentCityName.setText(currentWeather.get(0).getCityName().toUpperCase()+ ", " + currentWeather.get(0).getCountry().toUpperCase());
+        currentCityName.setWrapText(true);
 
         currentTextLabel1.setVisible(true);
         currentTextLabel11.setVisible(true);
-        currentTextLabel1.setText(currentWeather.getWeathers().get(0).toString());
-        String nameImage1 = currentWeather.getWeathers().get(0).getIcon();
+        currentTextLabel1.setText(currentWeather.get(0).toString());
+        String nameImage1 = currentWeather.get(0).getIcon();
         ImageView image1 = new ImageView(new Image("https://openweathermap.org/img/wn/"+ nameImage1 +"@2x.png"));
         image1.setFitHeight(50);
         image1.setFitWidth(60);
@@ -168,8 +166,8 @@ public class MainViewController implements Initializable {
 
         currentTextLabel2.setVisible(true);
         currentTextLabel21.setVisible(true);
-        currentTextLabel2.setText(currentWeather.getWeathers().get(1).toString());
-        String nameImage2 = currentWeather.getWeathers().get(1).getIcon();
+        currentTextLabel2.setText(currentWeather.get(1).toString());
+        String nameImage2 = currentWeather.get(1).getIcon();
         ImageView image2 = new ImageView(new Image("https://openweathermap.org/img/wn/"+ nameImage2 +"@2x.png"));
         image2.setFitHeight(50);
         image2.setFitWidth(60);
@@ -177,8 +175,8 @@ public class MainViewController implements Initializable {
 
         currentTextLabel3.setVisible(true);
         currentTextLabel31.setVisible(true);
-        currentTextLabel3.setText(currentWeather.getWeathers().get(2).toString());
-        String nameImage3 = currentWeather.getWeathers().get(2).getIcon();
+        currentTextLabel3.setText(currentWeather.get(2).toString());
+        String nameImage3 = currentWeather.get(2).getIcon();
         ImageView image3 = new ImageView(new Image("https://openweathermap.org/img/wn/"+ nameImage3 +"@2x.png"));
         image3.setFitHeight(50);
         image3.setFitWidth(60);
@@ -186,8 +184,8 @@ public class MainViewController implements Initializable {
 
         currentTextLabel4.setVisible(true);
         currentTextLabel41.setVisible(true);
-        currentTextLabel4.setText(currentWeather.getWeathers().get(3).toString());
-        String nameImage4 = currentWeather.getWeathers().get(3).getIcon();
+        currentTextLabel4.setText(currentWeather.get(3).toString());
+        String nameImage4 = currentWeather.get(3).getIcon();
         ImageView image4 = new ImageView(new Image("https://openweathermap.org/img/wn/"+ nameImage4 +"@2x.png"));
         image4.setFitHeight(50);
         image4.setFitWidth(60);
@@ -195,8 +193,8 @@ public class MainViewController implements Initializable {
 
         currentTextLabel5.setVisible(true);
         currentTextLabel51.setVisible(true);
-        currentTextLabel5.setText(currentWeather.getWeathers().get(4).toString());
-        String nameImage5 = currentWeather.getWeathers().get(4).getIcon();
+        currentTextLabel5.setText(currentWeather.get(4).toString());
+        String nameImage5 = currentWeather.get(4).getIcon();
         ImageView image5 = new ImageView(new Image("https://openweathermap.org/img/wn/"+ nameImage5 +"@2x.png"));
         image5.setFitHeight(50);
         image5.setFitWidth(60);
@@ -209,11 +207,11 @@ public class MainViewController implements Initializable {
             StatusCode statusCode = weatherService.getStatusConnect(searchCityField.getText());
 
             switch (statusCode) {
-                case SUCCESS:
-                    WeatherForecast searchWeather = weatherService.getWeather(searchCityField.getText());
+                case SUCCESS -> {
+                    List<SingleDayWeather> searchWeather = weatherService.getWeather(searchCityField.getText());
                     displayWeatherSearch(searchWeather);
-                    break;
-                case FAILED_4:
+                }
+                case FAILED_4 -> {
                     errorSearchLabel.setText("Proszę podać poprawne miasto");
                     searchCityName.setVisible(false);
                     searchTextLabel1.setVisible(false);
@@ -226,8 +224,8 @@ public class MainViewController implements Initializable {
                     searchTextLabel41.setVisible(false);
                     searchTextLabel5.setVisible(false);
                     searchTextLabel51.setVisible(false);
-                    break;
-                case FAILED_5:
+                }
+                case FAILED_5 -> {
                     errorSearchLabel.setText("Niestety serwer jest teraz niedostępny");
                     searchCityName.setVisible(false);
                     searchTextLabel1.setVisible(false);
@@ -240,8 +238,8 @@ public class MainViewController implements Initializable {
                     searchTextLabel41.setVisible(false);
                     searchTextLabel5.setVisible(false);
                     searchTextLabel51.setVisible(false);
-                    break;
-                case FAILED_UNEXPECTED_ERROR:
+                }
+                case FAILED_UNEXPECTED_ERROR -> {
                     errorSearchLabel.setText("Nieoczekiwany błąd");
                     searchCityName.setVisible(false);
                     searchTextLabel1.setVisible(false);
@@ -254,19 +252,19 @@ public class MainViewController implements Initializable {
                     searchTextLabel41.setVisible(false);
                     searchTextLabel5.setVisible(false);
                     searchTextLabel51.setVisible(false);
-                    break;
+                }
             }
         }
     }
 
-    private void displayWeatherSearch(WeatherForecast searchWeather) {
+    private void displayWeatherSearch(List<SingleDayWeather> searchWeather) {
         searchCityName.setVisible(true);
-        searchCityName.setText(searchWeather.getWeathers().get(0).getCityName().toUpperCase() + ", " + searchWeather.getWeathers().get(0).getCountry().toUpperCase());
+        searchCityName.setText(searchWeather.get(0).getCityName().toUpperCase() + ", " + searchWeather.get(0).getCountry().toUpperCase());
 
         searchTextLabel1.setVisible(true);
         searchTextLabel11.setVisible(true);
-        searchTextLabel1.setText(searchWeather.getWeathers().get(0).toString());
-        String nameImage1 = searchWeather.getWeathers().get(0).getIcon();
+        searchTextLabel1.setText(searchWeather.get(0).toString());
+        String nameImage1 = searchWeather.get(0).getIcon();
         ImageView image1 = new ImageView(new Image("https://openweathermap.org/img/wn/"+ nameImage1 +"@2x.png"));
         image1.setFitHeight(50);
         image1.setFitWidth(60);
@@ -274,8 +272,8 @@ public class MainViewController implements Initializable {
 
         searchTextLabel2.setVisible(true);
         searchTextLabel21.setVisible(true);
-        searchTextLabel2.setText(searchWeather.getWeathers().get(1).toString());
-        String nameImage2 = searchWeather.getWeathers().get(1).getIcon();
+        searchTextLabel2.setText(searchWeather.get(1).toString());
+        String nameImage2 = searchWeather.get(1).getIcon();
         ImageView image2 = new ImageView(new Image("https://openweathermap.org/img/wn/"+ nameImage2 +"@2x.png"));
         image2.setFitHeight(50);
         image2.setFitWidth(60);
@@ -283,8 +281,8 @@ public class MainViewController implements Initializable {
 
         searchTextLabel3.setVisible(true);
         searchTextLabel31.setVisible(true);
-        searchTextLabel3.setText(searchWeather.getWeathers().get(2).toString());
-        String nameImage3 = searchWeather.getWeathers().get(2).getIcon();
+        searchTextLabel3.setText(searchWeather.get(2).toString());
+        String nameImage3 = searchWeather.get(2).getIcon();
         ImageView image3 = new ImageView(new Image("https://openweathermap.org/img/wn/"+ nameImage3 +"@2x.png"));
         image3.setFitHeight(50);
         image3.setFitWidth(60);
@@ -292,8 +290,8 @@ public class MainViewController implements Initializable {
 
         searchTextLabel4.setVisible(true);
         searchTextLabel41.setVisible(true);
-        searchTextLabel4.setText(searchWeather.getWeathers().get(3).toString());
-        String nameImage4 = searchWeather.getWeathers().get(3).getIcon();
+        searchTextLabel4.setText(searchWeather.get(3).toString());
+        String nameImage4 = searchWeather.get(3).getIcon();
         ImageView image4 = new ImageView(new Image("https://openweathermap.org/img/wn/"+ nameImage4 +"@2x.png"));
         image4.setFitHeight(50);
         image4.setFitWidth(60);
@@ -301,8 +299,8 @@ public class MainViewController implements Initializable {
 
         searchTextLabel5.setVisible(true);
         searchTextLabel51.setVisible(true);
-        searchTextLabel5.setText(searchWeather.getWeathers().get(4).toString());
-        String nameImage5 = searchWeather.getWeathers().get(4).getIcon();
+        searchTextLabel5.setText(searchWeather.get(4).toString());
+        String nameImage5 = searchWeather.get(4).getIcon();
         ImageView image5 = new ImageView(new Image("https://openweathermap.org/img/wn/"+ nameImage5 +"@2x.png"));
         image5.setFitHeight(50);
         image5.setFitWidth(60);

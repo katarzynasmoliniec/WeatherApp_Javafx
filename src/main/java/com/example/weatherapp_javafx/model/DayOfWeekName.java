@@ -9,7 +9,7 @@ public enum DayOfWeekName {
     SATURDAY ("Sob"),
     SUNDAY ("Niedz");
 
-    private String dayName;
+    private final String dayName;
     DayOfWeekName(String dayName) {
         this.dayName = dayName;
     }

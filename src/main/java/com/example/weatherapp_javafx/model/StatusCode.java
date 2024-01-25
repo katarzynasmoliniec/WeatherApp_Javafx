@@ -5,4 +5,5 @@ public enum StatusCode {
     FAILED_5,
     FAILED_4,
     FAILED_UNEXPECTED_ERROR
+
 }
