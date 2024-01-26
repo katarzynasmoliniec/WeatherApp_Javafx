@@ -118,34 +118,6 @@ public class MainViewController implements Initializable {
                     currentTextLabel5.setVisible(false);
                     currentTextLabel51.setVisible(false);
                 }
-                case FAILED_5 -> {
-                    errorCurrentLabel.setText("Niestety serwer jest teraz niedostępny");
-                    currentCityName.setVisible(false);
-                    currentTextLabel1.setVisible(false);
-                    currentTextLabel11.setVisible(false);
-                    currentTextLabel2.setVisible(false);
-                    currentTextLabel21.setVisible(false);
-                    currentTextLabel3.setVisible(false);
-                    currentTextLabel31.setVisible(false);
-                    currentTextLabel4.setVisible(false);
-                    currentTextLabel41.setVisible(false);
-                    currentTextLabel5.setVisible(false);
-                    currentTextLabel51.setVisible(false);
-                }
-                case FAILED_UNEXPECTED_ERROR -> {
-                    errorCurrentLabel.setText("Nieoczekiwany błąd");
-                    currentCityName.setVisible(false);
-                    currentTextLabel1.setVisible(false);
-                    currentTextLabel11.setVisible(false);
-                    currentTextLabel2.setVisible(false);
-                    currentTextLabel21.setVisible(false);
-                    currentTextLabel3.setVisible(false);
-                    currentTextLabel31.setVisible(false);
-                    currentTextLabel4.setVisible(false);
-                    currentTextLabel41.setVisible(false);
-                    currentTextLabel5.setVisible(false);
-                    currentTextLabel51.setVisible(false);
-                }
             }
         }
     }
@@ -213,34 +185,6 @@ public class MainViewController implements Initializable {
                 }
                 case FAILED_4 -> {
                     errorSearchLabel.setText("Proszę podać poprawne miasto");
-                    searchCityName.setVisible(false);
-                    searchTextLabel1.setVisible(false);
-                    searchTextLabel11.setVisible(false);
-                    searchTextLabel2.setVisible(false);
-                    searchTextLabel21.setVisible(false);
-                    searchTextLabel3.setVisible(false);
-                    searchTextLabel31.setVisible(false);
-                    searchTextLabel4.setVisible(false);
-                    searchTextLabel41.setVisible(false);
-                    searchTextLabel5.setVisible(false);
-                    searchTextLabel51.setVisible(false);
-                }
-                case FAILED_5 -> {
-                    errorSearchLabel.setText("Niestety serwer jest teraz niedostępny");
-                    searchCityName.setVisible(false);
-                    searchTextLabel1.setVisible(false);
-                    searchTextLabel11.setVisible(false);
-                    searchTextLabel2.setVisible(false);
-                    searchTextLabel21.setVisible(false);
-                    searchTextLabel3.setVisible(false);
-                    searchTextLabel31.setVisible(false);
-                    searchTextLabel4.setVisible(false);
-                    searchTextLabel41.setVisible(false);
-                    searchTextLabel5.setVisible(false);
-                    searchTextLabel51.setVisible(false);
-                }
-                case FAILED_UNEXPECTED_ERROR -> {
-                    errorSearchLabel.setText("Nieoczekiwany błąd");
                     searchCityName.setVisible(false);
                     searchTextLabel1.setVisible(false);
                     searchTextLabel11.setVisible(false);

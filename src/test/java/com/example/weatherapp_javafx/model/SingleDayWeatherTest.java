@@ -27,6 +27,10 @@ class SingleDayWeatherTest {
         //when
         //then
         assertNotNull(singleDayWeather);
+        assertThat(singleDayWeather.getIcon(), containsString("20d"));
+        assertThat(singleDayWeather.getCountry(), containsString("PL"));
+        assertThat(singleDayWeather.getCityName(), containsString("Kraków"));
+        assertThat(singleDayWeather.getTemperature(), is(0.0F));
     }
 
     @Test

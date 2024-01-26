@@ -47,17 +47,6 @@ class WeatherServiceTest {
         assertThat(statusCode, is(StatusCode.FAILED_4));
     }
     @Test
-    void getStatusCodeFailed_5() {
-        //given
-        WeatherClient weatherClient = mock(WeatherClient.class);
-        WeatherService weatherService = new WeatherService(weatherClient);
-        given(weatherClient.getCode("Kraków")).willReturn(StatusCode.FAILED_5);
-        //when
-        StatusCode statusCode = weatherService.getStatusConnect("Kraków");
-        //then
-        assertThat(statusCode, is(StatusCode.FAILED_5));
-    }
-    @Test
     void getStatusCodeFailedUnexpectedError() {
         //given
         WeatherClient weatherClient = mock(WeatherClient.class);

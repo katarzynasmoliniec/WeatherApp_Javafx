@@ -15,8 +15,17 @@ import static org.mockito.Mockito.mock;
 @ExtendWith(MockitoExtension.class)
 class WeatherServiceFactoryTest {
     @MockitoSettings(strictness = Strictness.LENIENT)
+
     @Test
     void weatherClientShouldBeNotNull() {
+        //given
+        WeatherService weatherService = WeatherServiceFactory.createWeatherService();
+        //when
+        //then
+        assertNotNull(weatherService);
+    }
+    @Test
+    void weatherServiceFromStaticMethod() {
         try (var mockedStatic = Mockito.mockStatic(WeatherServiceFactory.class)) {
             var expectedExpression = new WeatherService(mock(WeatherClient.class));
             mockedStatic
@@ -26,7 +35,7 @@ class WeatherServiceFactoryTest {
         }
     }
     @Test
-    void weatherClientShouldBeOpenWeatherMapClient() {
+    void weatherServiceFromStaticMethodShouldBeOpenWeatherMapClient() {
         try (var mockedStatic = Mockito.mockStatic(WeatherServiceFactory.class)) {
             var expectedExpression = mock(OpenWeatherMapClient.class);
             mockedStatic
